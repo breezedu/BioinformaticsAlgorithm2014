@@ -26,11 +26,15 @@ public class Week_01_ApproximatePatternCount {
 	static Week_01_HammingDistanceProblem HamDis = new Week_01_HammingDistanceProblem();
 			
 			
-	//main() 
+	/*****************
+	 * Main();
+	 * @param args
+	 * @throws FileNotFoundException
+	 */
 	public static void main(String[] args) throws FileNotFoundException{
 		
 		
-		System.out.println("This is Hamming Distance Problem class.");
+		System.out.println("This is Approximate Pattern Count class.");
 		
 		//1st read_in data from D:\BioinformaticsCoursera\TXT\ApproximatePattern.txt
 		//Scanner read_in = new Scanner(new File("D:/BioinformaticsCoursera/TXT/ApproximatePattern.txt"));
