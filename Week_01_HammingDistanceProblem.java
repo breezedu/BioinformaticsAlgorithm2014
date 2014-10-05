@@ -73,7 +73,7 @@ public class Week_01_HammingDistanceProblem {
 	 */
 	public int run(String seqOne, String seqTwo) throws FileNotFoundException{
 		
-		System.out.println("This is Hamming Distance Problem in Week_01_HammingDistanceProblem.java class.");
+		//System.out.println("This is Hamming Distance Problem in Week_01_HammingDistanceProblem.java class.");
 		
 		//1st, read_in two string from D:\BioinformaticsCoursera\TXT\HammingDistance.txt
 		
@@ -81,6 +81,12 @@ public class Week_01_HammingDistanceProblem {
 		
 		//String seqOne = read_in.next();
 		//String seqTwo = read_in.next();
+		
+		//1st, different from main(); the run() method has two strings passed by call
+		if(seqOne.length() != seqTwo.length()){
+			
+			System.out.println("The two sequences could not match.");
+		}
 		
 		
 		//2nd, traverse through the sequence, calculate mismatches;
