@@ -20,7 +20,7 @@ import java.util.Scanner;
  * @author Jeff
  *
  */
-public class Week_1_PatternCount {
+public class Week_01_PatternCount {
 
 	public static void main(String[] args) throws FileNotFoundException{
 		
