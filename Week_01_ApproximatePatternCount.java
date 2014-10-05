@@ -79,7 +79,7 @@ public class Week_01_ApproximatePatternCount {
 	public int run(String seqOne, String seqTwo, int dis) throws FileNotFoundException{
 		
 		
-		System.out.println("This is Approximate Pattern Count class.");
+		//System.out.println("This is Approximate Pattern Count class.");
 		
 		//1st read_in data from D:\BioinformaticsCoursera\TXT\ApproximatePattern.txt
 		//Scanner read_in = new Scanner(new File("D:/BioinformaticsCoursera/TXT/ApproximatePattern.txt"));
@@ -114,7 +114,7 @@ public class Week_01_ApproximatePatternCount {
 		
 		//int miss = HamDis.run("AGTC", "AATC");
 		
-		System.out.println("Miss match is: " + count);
+		System.out.println("There are " + count + " reasonable miss match <= " + dis +"." );
 		
 				
 		return count;
