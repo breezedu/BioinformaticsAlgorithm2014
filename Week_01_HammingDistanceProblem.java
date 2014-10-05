@@ -26,6 +26,11 @@ import java.util.Scanner;
  */
 public class Week_01_HammingDistanceProblem {
 
+	/**********
+	 * Main()
+	 * @param args
+	 * @throws FileNotFoundException
+	 */
 	public static void main(String[] args) throws FileNotFoundException{
 		
 		System.out.println("This is Hamming Distance Problem.");
@@ -57,7 +62,16 @@ public class Week_01_HammingDistanceProblem {
 	}//end of main();
 	
 	
-public int run(String seqOne, String seqTwo) throws FileNotFoundException{
+	
+	/****************
+	 * create a run() method, thus other class could create a HammingDistanceProblem object hamDis
+	 * then call hamDis.run(string1, string2) to calculate the distance between two strings;
+	 * @param seqOne
+	 * @param seqTwo
+	 * @return
+	 * @throws FileNotFoundException
+	 */
+	public int run(String seqOne, String seqTwo) throws FileNotFoundException{
 		
 		System.out.println("This is Hamming Distance Problem in Week_01_HammingDistanceProblem.java class.");
 		
@@ -72,6 +86,12 @@ public int run(String seqOne, String seqTwo) throws FileNotFoundException{
 		//2nd, traverse through the sequence, calculate mismatches;
 		int miss_match = 0;
 		int seq_length = seqOne.length();
+		int seq_length2 = seqTwo.length();
+		if(seq_length != seq_length2) {
+			
+			System.out.println("The two sequences could not match.");
+			
+		}//end if() condition;
 		
 		for(int i=0; i<seq_length; i++){
 			
@@ -87,7 +107,7 @@ public int run(String seqOne, String seqTwo) throws FileNotFoundException{
 		
 		return miss_match;
 		
-	}//end of main();
+	}//end of run();
 	
 	
 }//end of Hamming Distance Problem class;
