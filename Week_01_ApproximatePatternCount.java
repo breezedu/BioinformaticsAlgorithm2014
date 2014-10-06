@@ -114,7 +114,7 @@ public class Week_01_ApproximatePatternCount {
 		
 		//int miss = HamDis.run("AGTC", "AATC");
 		
-		System.out.println("There are " + count + " reasonable miss match <= " + dis +"." );
+		//System.out.println("There are " + count + " reasonable miss match <= " + dis +"." );
 		
 				
 		return count;

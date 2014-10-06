@@ -3,7 +3,6 @@ package courseraBioinformatics2014;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.Scanner;
 
 /*********************************
@@ -33,46 +32,95 @@ import java.util.Scanner;
 public class Week_01_FrequentWordswithMismatchesProblem {
 	
 	//create a ApproximatePatternCount object;
-	static Week_01_ApproximatePatternCount patCount = new Week_01_ApproximatePatternCount();
+	static Week_01_ApproximatePatternCount approPattCount = new Week_01_ApproximatePatternCount();
 	
+	
+	//create a GenerateAllKmers object;
+	static Week_01_GenerateAllKmers generateKmers = new Week_01_GenerateAllKmers();
+	
+	
+	/***********
+	 * Main();
+	 * @param args
+	 * @throws FileNotFoundException
+	 */
 	public static void main(String[] args) throws FileNotFoundException{
 		
 		//1st, read_in data from D:\BioinformaticsCoursera\TXT\frequent_words_mismatch_data_1.txt
-		Scanner read_in = new Scanner(new File("D:/BioinformaticsCoursera/TXT/frequent_words_mismatch_data_1.txt"));
+		String routine = "D:/BioinformaticsCoursera/TXT/";
+		String doc = "dataset_9_7.txt";
+		
+		Scanner read_in = new Scanner(new File(routine + doc));
 		
 		String ori_sequence = read_in.next();
-		int kmer = read_in.nextInt();
+		int kmer_length = read_in.nextInt();
 		int dis = read_in.nextInt();
 		
 		
-		//2nd, get unique sub-sequences, put them into an ArrayList<>
-		ArrayList<String> subSeq_list = new ArrayList<String>();
+		//2nd, call generateKmers.run() to get an ArrayList of all possible Kmers
+		//with the Length of kmer_length;
+		ArrayList<String> kmers_list = generateKmers.run(kmer_length);
+	
 		
-		//use hash-set to check if the new sub-sequence is unique;
-		HashSet<String> subSet = new HashSet<String>();
+		//3rd, take each possible sub-sequence from subSeq_list, compare the ApproximatePatternCount with 
+		//the original sequence, update the freq_max whenever we have a new maximum value;
+		ArrayList<String> maxKmers_list = new ArrayList<String>();
 		
-		//the index of the last sub-sequence;
-		int end_index = ori_sequence.length()-kmer;
-		//System.out.println(ori_sequence.substring(end_index));
+		//keep record of maximum frequency; 
+		int freq_max = 0;
 		
-		for(int i=0; i<=end_index; i++){
+		int arraylist_size = kmers_list.size();	//the size of sub-sequence arrayList;
+		
+		for(int i=0; i<arraylist_size; i++){
 			
-			String subSeq = ori_sequence.substring(i, i+kmer);
+			int freq_count = approPattCount.run(ori_sequence, kmers_list.get(i), dis);
 			
-			if(!subSet.contains(subSeq)) {
+			if(freq_count > freq_max){
 				
-				subSeq_list.add(subSeq);
+				maxKmers_list.clear();
+				maxKmers_list.add(kmers_list.get(i));
+				freq_max = freq_count; 
 				
-			}//end if subSet !contains(subseq) condition;
+				System.out.println("  " + kmers_list.get(i) + ", " + freq_max);
+				
+			} else if(freq_count == freq_max) {
+				
+				maxKmers_list.add(kmers_list.get(i));
+			
+			}//end if (freq_count >=< freq_max) conditions;
+			
+		}//end for i< arrayList_size loop;
 		
-		}//end for i<=end_index loop;
 		
 		
-		//3rd, 
+		//printout the arrayList with max-frequency sub-sequences;
+		printArraylist(maxKmers_list);
 		
-		int count = patCount.run("AAAGGCC", "AAGC", 1);		
-		System.out.println("count: " + count);
+		
+		//close read_in scanner;
+		read_in.close();
 		
 	}//end main();
+	
+	
 
+	/********
+	 * Printout an arraylist of strings;
+	 * @param maxFreq_list
+	 */
+	private static void printArraylist(ArrayList<String> al) {
+		// TODO Auto-generated method stub
+		
+		int size = al.size();
+		
+		for(int i=0; i<size; i++){
+			
+			System.out.print(al.get(i) + " ");
+		}//end for i<size loop;
+		
+		System.out.println();
+		
+	}//end printArraylist() method;
+
+	
 }//end Week_01_FrequentWordswithMismatchesProblem;

@@ -105,7 +105,7 @@ public class Week_01_HammingDistanceProblem {
 		}
 		
 		//3rd, printout the # of miss matches;
-		System.out.println("There are " + miss_match +" miss matches.");
+		//System.out.println("There are " + miss_match +" miss matches.");
 		
 		
 		//4th, close the scanner
