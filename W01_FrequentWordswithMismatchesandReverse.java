@@ -30,20 +30,31 @@ import java.util.Scanner;
 
 public class W01_FrequentWordswithMismatchesandReverse {
 	
+	
+	/****************************************************/
 	//create a ApproximatePatternCount object;
+	//call approPattCount.run(seq1, seq2, dis)
+	//it will return the ApproximatePatternCount of two sequence with miss match less than dis;
 	static W01_ApproximatePatternCount approPattCount = new W01_ApproximatePatternCount();
 	
 	
-	//create a GenerateAllKmers object;
+
+	/****************************************************/
+	//create a ApproximatePatternCount object;
+	//call approPattCount.run(seq1, seq2, dis)
+	//it will return the ApproximatePatternCount of two sequence with miss match less than dis;
 	static W01_GenerateAllKmers generateKmers = new W01_GenerateAllKmers();
 	
 	
-	/***********
+	
+	/******************************************************
 	 * Main();
 	 * @param args
 	 * @throws FileNotFoundException
 	 */
 	public static void main(String[] args) throws FileNotFoundException{
+		
+		Stopwatch timmer = new Stopwatch();
 		
 		//1st, read_in data from D:\BioinformaticsCoursera\TXT\frequent_words_mismatch_data_1.txt
 		String routine = "D:/BioinformaticsCoursera/TXT/";
@@ -77,11 +88,13 @@ public class W01_FrequentWordswithMismatchesandReverse {
 		//close read_in scanner;
 		read_in.close();
 		
+		System.out.println("Done! \n total time used: " + timmer.elapsedTime() +".");
+		
 	}//end main();
 	
 	
 	
-	/*********
+	/****************************************************
 	 * Get the complement sequence: AGGCCT -> TCCGGA;
 	 * @param revSeq
 	 * @return
@@ -112,7 +125,7 @@ public class W01_FrequentWordswithMismatchesandReverse {
 
 
 
-	/**********************
+	/*****************************************************************
 	 * get the reverse string;
 	 * @param oriSeq
 	 * @return
@@ -133,7 +146,7 @@ public class W01_FrequentWordswithMismatchesandReverse {
 
 
 
-	/****************************
+	/***********************************************************************
 	 * get the kmers with maximum ApprociatePatternCount;
 	 * @param ori_sequence
 	 * @param kmers_list
@@ -156,6 +169,7 @@ public class W01_FrequentWordswithMismatchesandReverse {
 			String revSeq = reverseString(oriSeq);
 			String compSeq = complementString(revSeq);
 			
+			//maximizing the sum approPattCountd(Text, Pattern, dis)+ approPattCountd(Text, Pattern, dis)
 			int freq_count = approPattCount.run(ori_sequence, oriSeq, dis) + approPattCount.run(ori_sequence, compSeq, dis);
 					
 			if(freq_count > freq_max){
@@ -179,7 +193,7 @@ public class W01_FrequentWordswithMismatchesandReverse {
 
 
 
-	/********
+	/***************************************************
 	 * Printout an arraylist of strings;
 	 * @param maxFreq_list
 	 */
