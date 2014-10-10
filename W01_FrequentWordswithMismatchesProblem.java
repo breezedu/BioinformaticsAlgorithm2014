@@ -31,11 +31,15 @@ import java.util.Scanner;
 
 public class W01_FrequentWordswithMismatchesProblem {
 	
+	
 	//create a ApproximatePatternCount object;
+	//call approPattCount.run(seq1, seq2, dis)
+	//it will return the ApproximatePatternCount of two sequence with miss match less than dis;
 	static W01_ApproximatePatternCount approPattCount = new W01_ApproximatePatternCount();
 	
 	
 	//create a GenerateAllKmers object;
+	//call generateKmers.run(int Len), it will return an ArrayList of all possible Kmers with Len nucleotides'
 	static W01_GenerateAllKmers generateKmers = new W01_GenerateAllKmers();
 	
 	
@@ -45,6 +49,7 @@ public class W01_FrequentWordswithMismatchesProblem {
 	 * @throws FileNotFoundException
 	 */
 	public static void main(String[] args) throws FileNotFoundException{
+		
 		
 		//1st, read_in data from D:\BioinformaticsCoursera\TXT\frequent_words_mismatch_data_1.txt
 		String routine = "D:/BioinformaticsCoursera/TXT/";
@@ -57,10 +62,12 @@ public class W01_FrequentWordswithMismatchesProblem {
 		int dis = read_in.nextInt();
 		
 		
+		
 		//2nd, call generateKmers.run() to get an ArrayList of all possible Kmers
 		//with the Length of kmer_length;
 		ArrayList<String> kmers_list = generateKmers.run(kmer_length);
 	
+		
 		
 		//3rd, take each possible sub-sequence from subSeq_list, compare the ApproximatePatternCount with 
 		//the original sequence, update the freq_max whenever we have a new maximum value;
@@ -93,11 +100,12 @@ public class W01_FrequentWordswithMismatchesProblem {
 		
 		
 		
-		//printout the arrayList with max-frequency sub-sequences;
+		//4th, printout result, the arrayList with max-frequency sub-sequences;
 		printArraylist(maxKmers_list);
 		
 		
-		//close read_in scanner;
+		
+		//5th, close read_in scanner;
 		read_in.close();
 		
 	}//end main();
