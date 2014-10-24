@@ -65,6 +65,24 @@ public class W02_GeneTheoSpectrumPeptide_C {
 	}//end of main();
 	
 	
+	public ArrayList<Integer> run(String ori_peptide){
+		
+		//1st, get total_Mass for ori_peptide;
+		int total_Mass = getSeqMass(ori_peptide);
+		
+		//2nd, get all sub-sequence for the original peptide string;
+		ArrayList<String> sub_peptides = getSubSeq(ori_peptide);
+		
+		
+		//3rd, get mass spectrum for each sub-sequence (this step could be merged into step-2;
+		ArrayList<Integer> mass_peptides = getMassSeq(sub_peptides, total_Mass);
+		
+		
+		//4th, return the mass_peptides arrayList;
+		return mass_peptides;
+		
+	}//end run() method;
+	
 
 	private static ArrayList<Integer> getMassSeq(ArrayList<String> peptides, int total_Mass) {
 		// TODO get the mass weight (total weight) for each peptide sequence in the peptides arrayList;
@@ -96,7 +114,7 @@ public class W02_GeneTheoSpectrumPeptide_C {
 		 *D 115		K 128		Q 128		E 129		M 131
 		 *H 137		F 147		R 156		Y 163		W 186
 		 */
-		
+		massList.add(total_Mass);
 		Collections.sort(massList);
 		
 		return massList;
@@ -154,6 +172,8 @@ public class W02_GeneTheoSpectrumPeptide_C {
 		
 		for(int i=0; i<Len; i++){
 			
+			if(i%30 == 0) System.out.println();
+			
 			System.out.print(" " + arrayList.get(i));
 		}
 		
@@ -170,7 +190,7 @@ public class W02_GeneTheoSpectrumPeptide_C {
 		//use double for loops to get all sub-strings;
 		for(int i=0; i<Len; i++){
 			
-			for(int j=i+1; j<=Len; j++){
+			for(int j=i+1; j<Len; j++){
 				
 				String sub_seq = peptide.substring(i,j);
 				subList.add(sub_seq);
