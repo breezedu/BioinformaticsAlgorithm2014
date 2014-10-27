@@ -31,9 +31,14 @@ import java.util.Scanner;
  */
 
 public class W02_GeneTheoSpectrumPeptide_L {
-
+	
+	/*************************************
+	 * Main();
+	 * @param args
+	 */
 	public static void main(String[] args){
 		
+		W02_GeneTheoSpectrumPeptide_L currOBJ = new W02_GeneTheoSpectrumPeptide_L();
 		
 		System.out.println("This is GeneTheoSpectrumPeptide program. ");
 		
@@ -44,22 +49,40 @@ public class W02_GeneTheoSpectrumPeptide_L {
 		String ori_peptide = input.next();
 		
 		
-		//2nd, get all sub-sequence for the original peptide string;
-		ArrayList<String> sub_peptides = getSubSeq(ori_peptide);
+		//2nd, call run() method, to generate all theoretical Mass peaks;
+		ArrayList<Integer> MassList = currOBJ.run(ori_peptide);
 		
 		
-		//3rd, get mass spectrum for each sub-sequence (this step could be merged into step-2;
-		ArrayList<Integer> mass_peptides = getMassSeq(sub_peptides);
+		//3rd, printout the mass spectrum;
+		printArrayList(MassList);
 		
 		
-		//4th, printout the mass spectrum;
-		printArrayList(mass_peptides);
-		
-		
-		//close input
+		//close Scanner
 		input.close();
 		
 	}//end of main();
+
+	
+	/**********
+	 * 
+	 * @param ori_peptide
+	 * @return
+	 */
+	public ArrayList<Integer> run(String ori_peptide){		
+		
+		
+		//1st, get all sub-sequence for the original peptide string;
+		ArrayList<String> sub_peptides = getSubSeq(ori_peptide);
+		
+		
+		//2nd, get mass spectrum for each sub-sequence (this step could be merged into step-2;
+		ArrayList<Integer> mass_peptides = getMassSeq(sub_peptides);
+		
+		
+		//3rd, return the mass_peptide arrayList;
+		return mass_peptides;
+		
+	}//end of run();
 	
 	
 
