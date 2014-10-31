@@ -21,6 +21,7 @@ public class CBB520HW2_Part2 {
 		//2nd, create an arrayList of contigs.
 		ArrayList<contig> contigList = createContigArrayList();
 		
+		//3rd, score contigs and genes;
 		scoreContigList(geneList, contigList);
 		
 		
@@ -32,6 +33,7 @@ public class CBB520HW2_Part2 {
 		int numOfContig = contigList.size();
 		for(int i=0; i<numOfContig; i++){
 			
+			//Score one contig aginst all genes;
 			scoreContig(contigList.get(i), geneList);
 			
 		}
@@ -48,12 +50,12 @@ public class CBB520HW2_Part2 {
 		
 		for(int i=0; i<numOfGenes; i++){
 			
-			String currGene = geneList.get(i).sequence;
+			String currGene = geneList.get(i).getSequence();
 			
-			if(compareTwoSeq(currGene, contig.sequence)) score++;
+			if(compareTwoSeq(currGene, contig.getSequence() )) score++;
 		}
 		
-		System.out.println("Contig " + contig.name +" score: " + score);
+		System.out.println("Contig " + contig.getName() +" score: " + score);
 		
 	}//end scoreContig;
 
@@ -85,7 +87,7 @@ public class CBB520HW2_Part2 {
 		
 		return false;
 	}//end compareTwoSeq() method;
-
+	
 	
 	
 	private static boolean Over50Identical(String str1, String str2) {
@@ -121,8 +123,8 @@ public class CBB520HW2_Part2 {
 		ArrayList<contig> contigList = new ArrayList<contig>();
 				
 		//create a new gene object;
-		contig new_contig = new contig();
-		new_contig.sequence = "";
+		contig new_contig = new contig("", "", 0);
+		
 						
 		while(genesReader.hasNextLine()){
 							
@@ -130,23 +132,18 @@ public class CBB520HW2_Part2 {
 							
 			if(currStr.length()>0 && currStr.charAt(0) == '>'){				
 								
-				new_contig.length = new_contig.sequence.length();
+				new_contig.setLength(new_contig.getSequence().length() );
 				
-				if(new_contig.length > 1000)
+				if(new_contig.getLength() > 1000)
 					contigList.add(new_contig);
 								
 				//create a new gene object;
-				new_contig = new contig();
-								
-				//assign the first line as the name of the new-gene;
-				new_contig.name = currStr;
-								
-				new_contig.sequence = "";
+				new_contig = new contig(currStr, "", 0);
 								
 								
 			} else {
 								
-				new_contig.sequence += currStr;
+				new_contig.setSequence(new_contig.getSequence() + currStr);
 			}
 							
 							
@@ -157,7 +154,7 @@ public class CBB520HW2_Part2 {
 					
 		for(int i=0; i<contigList.size(); i++){
 				
-			System.out.println(contigList.get(i).name + "\n                 " + contigList.get(i).length );
+			System.out.println(contigList.get(i).getName() + "\n                 " + contigList.get(i).getLength() );
 		}
 				
 		contigList.remove(0);
@@ -189,8 +186,8 @@ public class CBB520HW2_Part2 {
 		ArrayList<gene> geneList = new ArrayList<gene>();
 		
 		//create a new gene object;
-		gene newGene = new gene();
-		newGene.sequence = "";
+		gene newGene = new gene("","", 0);
+		
 				
 		while(genesReader.hasNextLine()){
 					
@@ -198,22 +195,22 @@ public class CBB520HW2_Part2 {
 					
 			if(currStr.length()>0 && currStr.charAt(0) == '>'){				
 						
-				newGene.length = newGene.sequence.length();
+				newGene.setLength( newGene.getSequence().length() );
 						
 				geneList.add(newGene);
 						
 				//create a new gene object;
-				newGene = new gene();
+				newGene = new gene("", "", 0);
 						
 				//assign the first line as the name of the new-gene;
-				newGene.name = currStr;
+				newGene.setName( currStr );
 						
-				newGene.sequence = "";
+				newGene.setSequence("");
 						
 						
 			} else {
 						
-				newGene.sequence += currStr;
+				newGene.setSequence(newGene.getSequence() + currStr);
 			}
 					
 					
@@ -224,7 +221,7 @@ public class CBB520HW2_Part2 {
 			
 		for(int i=0; i<geneList.size(); i++){
 		
-			System.out.println(geneList.get(i).name + "\n                 " + geneList.get(i).length );
+			System.out.println(geneList.get(i).getName() + "\n                 " + geneList.get(i).getLength() );
 		}
 		
 		geneList.remove(0);
@@ -238,16 +235,84 @@ public class CBB520HW2_Part2 {
 
 class gene {
 	
-	String name;
-	String sequence;
-	int length;
+	private String name;
+	private String sequence;
+	private int length;
+	
+	public gene(String name, String sequence, int length){
+		super();
+		
+		this.name = name;
+		this.sequence = sequence;
+		this.length = length;
+		
+	}
+	
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	
+	public String getSequence(){
+		return sequence;
+	}
 
+	public void setSequence(String sequence){
+		this.sequence = sequence;
+	}
+	
+	public int getLength(){
+		return length;
+	}
+	
+	public void setLength(int length){
+		this.length = length;
+	}
+	
+	
+	
 }//end of gene class;
 
 class contig{
 	
-	String name;
-	String sequence;
-	int length;
+	private String name;
+	private String sequence;
+	private int length;
+	
+	public contig(String name, String sequence, int length){
+		super();
+		
+		this.name = name;
+		this.sequence = sequence;
+		this.length = length;
+		
+	}
+	
+	
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	
+	public String getSequence(){
+		return sequence;
+	}
+
+	public void setSequence(String sequence){
+		this.sequence = sequence;
+	}
+	
+	public int getLength(){
+		return length;
+	}
+	
+	public void setLength(int length){
+		this.length = length;
+	}
+	
 	
 }//end of contig class;
