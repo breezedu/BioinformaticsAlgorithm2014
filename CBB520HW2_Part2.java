@@ -1,7 +1,10 @@
 package courseraBioinformatics2014;
 
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -11,7 +14,7 @@ import java.util.Scanner;
  */
 public class CBB520HW2_Part2 {
 	
-	public static void main(String[] args) throws FileNotFoundException{
+	public static void main(String[] args) throws IOException{
 		
 		
 		
@@ -27,38 +30,49 @@ public class CBB520HW2_Part2 {
 		
 	}//end main();
 
-	private static void scoreContigList(ArrayList<gene> geneList, ArrayList<contig> contigList) {
+	private static void scoreContigList(ArrayList<gene> geneList, ArrayList<contig> contigList) throws IOException {
 		// TODO Auto-generated method stub
+		String routine = "D:/";
+		System.out.println("The output file will be put D:/");
 		
-		int numOfContig = contigList.size();
+		File output_file = new File(routine +"cbb520_output.txt");
+		BufferedWriter output = new BufferedWriter(new FileWriter(output_file));
+		
+		int numOfContig = geneList.size();
 		for(int i=0; i<numOfContig; i++){
 			
 			//Score one contig aginst all genes;
-			scoreContig(contigList.get(i), geneList);
+			scoreContig(geneList.get(i), contigList, output);
 			
 		}
+		
+		output.close();
 		
 	}//end of scoreContigList();
 	
 	
 
-	private static void scoreContig(contig contig, ArrayList<gene> geneList) {
+	private static void scoreContig(gene gene, ArrayList<contig> contigList, BufferedWriter output) throws IOException {
 		// TODO Auto-generated method stub
 		
-		int numOfGenes = geneList.size();
+		int numOfContigs = contigList.size();
 		int score = 0;
 		
-		for(int i=0; i<numOfGenes; i++){
+		
+		for(int i=0; i<numOfContigs; i++){
 			
-			String currGene = geneList.get(i).getSequence();
+			String currContig = contigList.get(i).getSequence();
 			
-			if(compareTwoSeq(currGene, contig.getSequence() )) score++;
+			if(compareTwoSeq(gene.getSequence(), currContig )) score++;
 		}
 		
-		System.out.println("Contig " + contig.getName() +" score: " + score);
+		
+		System.out.println("Score: " + score + ", Gene: " + gene.getName());
+		
+		output.write("Score" + "\t" + score +"\t" +"Gene \t" + gene.getName() +"\n");
 		
 	}//end scoreContig;
-
+	
 	
 	
 	private static boolean compareTwoSeq(String geneSeq, String contigSeq) {
@@ -115,10 +129,11 @@ public class CBB520HW2_Part2 {
 		System.out.println("Step 2, read_in contigs from velvet or abyss outputs.");
 		
 		
-		Scanner genesReader = new Scanner(new File("D:/BioinformaticsCoursera/TXT/cbb520/abyss_k43_contigs.fa"));
+		Scanner genesReader = new Scanner(new File("D:/BioinformaticsCoursera/TXT/cbb520/abyss_k69_contigs.fa"));
 		//Scanner genesReader = new Scanner(new File("D:/BioinformaticsCoursera/TXT/cbb520/S288C_reference.fsa"));
-				
-		
+		//Scanner genesReader = new Scanner(new File("D:/BioinformaticsCoursera/TXT/cbb520/velvet_output_contigs.fa"));
+
+	
 		//new ArrayList<gene>();
 		ArrayList<contig> contigList = new ArrayList<contig>();
 				
@@ -177,9 +192,9 @@ public class CBB520HW2_Part2 {
 		
 		//1st, read_in genes from D:/BioinformaticsCoursera/TXT/cbb520
 		System.out.println("Step 1, read_in genes from seqdump.txt.");
-		//Scanner genesReader = new Scanner(new File("D:/BioinformaticsCoursera/TXT/cbb520/seqdump.txt"));
+		Scanner genesReader = new Scanner(new File("D:/BioinformaticsCoursera/TXT/cbb520/seqdump.txt"));
 		
-		Scanner genesReader = new Scanner(new File("D:/BioinformaticsCoursera/TXT/cbb520/seqdump_old.txt"));
+		//Scanner genesReader = new Scanner(new File("D:/BioinformaticsCoursera/TXT/cbb520/seqdump_old.txt"));
 		
 		
 		//new ArrayList<gene>();
