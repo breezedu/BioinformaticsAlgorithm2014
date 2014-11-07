@@ -122,7 +122,10 @@ def compareTwoSeq(geneSeq, contigSeq):
         subSeqOfContig = contigSeq[start: start + geneLen]
         
         #print("subset result: " + subSeqOfContig )
-        
+
+        ##
+        ## Check both the original gene sequence and the reverse gene;
+        ## if any get a match, return True;
         if(Over50Identical(subSeqOfContig, geneSeq)):
             print("Got a match for the original gene!")
             start = start + 1
@@ -133,10 +136,7 @@ def compareTwoSeq(geneSeq, contigSeq):
             return True
         else:
             start = start + 1
-            #l = l+1
-            #print(str(l))
-            #return False
-            #print("-----False:)----------------------")
+
             #return False
     #print("neither original nor reverse gene got a match, :( ") 
     return False
@@ -147,6 +147,7 @@ def compareTwoSeq(geneSeq, contigSeq):
 #check if two sequences have more than 50% identical blocks;
 ####################################################################################################
 def Over50Identical(str1, str2):
+    #if the length of contig is longer than the gene, just return false;
     if(len(str1)>len2)
         return False
     
@@ -155,11 +156,13 @@ def Over50Identical(str1, str2):
     #print("Length of the string: " + str(Len))
     
     ident = 0
+    #check the count of identical nucletides from start to end;
     for m in range(0, Len, 1):
         if(str1[m] == str2[m]):
             ident = ident + 1
 
     #print("Matches: " + str(ident) + "total length: " + str(Len))
+    #if there are more than 50% identical between two sequence, return True;
     if(ident >= Len/2):
         return True
     else:
@@ -181,14 +184,17 @@ def createContigArrayList():
     with open('D:\\BioinformaticsCoursera\\TXT\\cbb520\\abyss_k43_contigs.fa', 'r') as genesReader:
     #with open('D:\\BioinformaticsCoursera\\TXT\\cbb520\\abyss_k69_contigs.fa', 'r') as genesReader:
     #with open('D:\\BioinformaticsCoursera\\TXT\\cbb520\\velvet_contigs.fa', 'r') as genesReader:
+        #readin data line by line
         lines = genesReader.read().splitlines()
         for n in range(0, len(lines) - 1 , 1):
             currStr = lines[n]
+             #if the first char is '>', put curr contig object into ArrayList, then create a new contig object.
             if(len(currStr) > 0 and currStr[0] == '>'):
                 new_contig.setLength(len(new_contig.getSequence()))
                 if(new_contig.getLength() > 500):
                     contigList.append(new_contig)
                 new_contig = contig(currStr, "", 0)
+            #if the first char is not '>', just add another sequence to current contig's sequence
             else:
                 seq = new_contig.getSequence() + currStr
                 new_contig.setSequence(seq)
@@ -215,16 +221,22 @@ def createGeneArrayList():
     #add file here from resulting Gene list (sequence.txt)
     #with open('D:\\BioinformaticsCoursera\\TXT\\cbb520\\seqdump_2.txt', 'r') as genesReader:
     with open('D:\\BioinformaticsCoursera\\TXT\\cbb520\\seqdump.txt', 'r') as genesReader:
+
+        #readin data line by line
         lines = genesReader.read().splitlines()
         for n in range(0, len(lines) - 1 , 1):
             currStr = lines[n]
+            #if the first char is '>', put curr gene object into ArrayList, then create a new gene object.
             if(len(currStr) > 0 and currStr[0] == '>'):
                 new_gene.setLength(len(new_gene.getSequence()))
                 geneList.append(new_gene)
                 new_gene = gene(currStr, "", 0)
+            #if the first char is not '>', just add another sequence to current gene's sequence;
             else:
                 seq = new_gene.getSequence() + currStr
                 new_gene.setSequence(seq)
+                
+    #printout the number of the genes in the arrayList            
     print("Genes: " + str(len(geneList)))
 
     #for p in range(0, len(geneList), 1):
@@ -237,10 +249,17 @@ def createGeneArrayList():
 #create geneMain() method:
 ####################################################################################################
 def main():
+
+    #step 1: create an ArrayList to store all genes
     geneList = createGeneArrayList()
-    contigList = createContigArrayList()    
+
+    #step 2: create an ArrayList to store all contigs
+    contigList = createContigArrayList()
+
+    #step 3: align each gene with all contigs, to check if there's any match for that gene;
     scoreContigList(geneList, contigList)
 
+#check main
 if __name__ == "__main__":
     main()
         
