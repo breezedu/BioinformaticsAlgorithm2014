@@ -1,4 +1,7 @@
 #include "Python.h"
+# * Taking your set of longest, conserved, unique gene sequences you found above, 
+# * write a program to test the quality of an S. cerevisiae genome assembly.
+
 
 ####################################################################################################
 #create an object of gene;
@@ -210,6 +213,7 @@ def createGeneArrayList():
     geneList = []
 
     #add file here from resulting Gene list (sequence.txt)
+    #with open('D:\\BioinformaticsCoursera\\TXT\\cbb520\\seqdump_2.txt', 'r') as genesReader:
     with open('D:\\BioinformaticsCoursera\\TXT\\cbb520\\seqdump.txt', 'r') as genesReader:
         lines = genesReader.read().splitlines()
         for n in range(0, len(lines) - 1 , 1):
