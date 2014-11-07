@@ -35,7 +35,7 @@ public class W02_SpectralConvolutionProblem {
 		
 		//1st, create an arrayList of mass spectrum
 		String routine = "D:/BioinformaticsCoursera/TXT/";
-		String doc_name = "dataset_104_4.txt";
+		String doc_name = "spectral_convolution_data.txt";
 		
 		ArrayList<Integer> massList = readMassList(routine, doc_name);
 		
@@ -84,6 +84,31 @@ public class W02_SpectralConvolutionProblem {
 		
 		
 		
+		//create IndexScorePair objects;
+		ArrayList<IndexScorePair> pairList = new ArrayList<IndexScorePair>();
+		
+		for(int i=0; i<soloMassList.size(); i++){
+			
+			IndexScorePair currPair = new IndexScorePair(i, massRepeat.get(soloMassList.get(i)));
+			pairList.add(currPair);
+		}
+		
+		Collections.sort(pairList);
+		
+		//printout the sorted list, with repeats:
+		System.out.println("\n\nPrintout the sorted list, with repeats!");
+		
+		for(int i=0; i<pairList.size(); i++){
+			
+			int index = pairList.get(i).getIndex();			
+			System.out.println();
+			
+			for(int j=0; j<massRepeat.get( soloMassList.get(index) ); j++){
+				
+				System.out.print(" " + soloMassList.get(index));
+			}
+		}
+
 		
 	}//end of main();
 
