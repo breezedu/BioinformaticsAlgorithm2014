@@ -48,8 +48,8 @@ public class W02_LeaderBoardCycloPeptideSequencing {
 	/**************************************************************************
 	 * Possible peptide blocks and their Mass spectrum integers:
 	 *
-	 *	G	A	S	P	V	T	C	I/L	N	D	K/Q	E	M	H	F	R	Y	W
-	 *	57	71	87	97	99	101	103	113	114	115	128	129	131	137	147	156	163	186
+	 *	G  A  S  P  V  T   C   I/L N   D   K/Q E   M   H   F   R   Y   W
+	 *	57 71 87 97 99 101 103 113 114 115 128 129 131 137 147 156 163 186
 	 *	
 	 *	will use these integers to "Expand" the sequences.
 	 * @throws FileNotFoundException 
@@ -81,7 +81,7 @@ public class W02_LeaderBoardCycloPeptideSequencing {
 		
 		
 		//3rd, readIn data from D:\BioinformaticsCoursera\TXT\leaderboard_clean.txt
-		Scanner readIn = new Scanner(new File("D:/BioinformaticsCoursera/TXT/dataset_102_7.txt"));
+		Scanner readIn = new Scanner(new File("D:/BioinformaticsCoursera/TXT/dataset_102_9.txt"));
 
 		//Scanner readIn = new Scanner(new File("D:/BioinformaticsCoursera/TXT/leaderboard_clean.txt"));
 		
