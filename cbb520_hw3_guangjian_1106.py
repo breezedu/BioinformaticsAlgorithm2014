@@ -148,7 +148,7 @@ def compareTwoSeq(geneSeq, contigSeq):
 ####################################################################################################
 def Over50Identical(str1, str2):
     #if the length of contig is longer than the gene, just return false;
-    if(len(str1)>len2)
+    if(len(str1)>len(str2)):
         return False
     
     #print("str1: " + str1 + "str2: " + str2)
