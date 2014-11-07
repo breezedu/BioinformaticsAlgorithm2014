@@ -8,42 +8,61 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-/*********************************
- * 
+/********************************************************************************
+ * Taking your set of longest, conserved, unique gene sequences you found above, 
+ * write a program to test the quality of an S. cerevisiae genome assembly.
  * 
  */
 public class CBB520HW2_Part2 {
 	
-	public static void main(String[] args) throws IOException{
-		
+	/********************************************************
+	 * main() 
+	 * @param args
+	 * @throws IOException
+	 */
+	public static void main(String[] args) throws IOException{		
 		
 		
 		//1st, create an arrayList to store all genes;
 		ArrayList<gene> geneList = createGeneArrayList();
 		
+		
 		//2nd, create an arrayList of contigs.
 		ArrayList<contig> contigList = createContigArrayList();
+		
 		
 		//3rd, score contigs and genes;
 		scoreContigList(geneList, contigList);
 		
 		
 	}//end main();
-
+	
+	
+	/*********************************************
+	 * Score each gene to all contigs, to see if any contige would have a subsequence align with that gene
+	 * total score will depends on how many genes get alignment;
+	 *  
+	 * @param geneList
+	 * @param contigList
+	 * @throws IOException
+	 */
 	private static void scoreContigList(ArrayList<gene> geneList, ArrayList<contig> contigList) throws IOException {
 		// TODO Auto-generated method stub
 		String routine = "D:/";
 		System.out.println("The output file will be put D:/");
 		
-		File output_file = new File(routine +"cbb520_output.txt");
+		File output_file = new File(routine +"K70_cbb520_output.txt");
 		BufferedWriter output = new BufferedWriter(new FileWriter(output_file));
+		
+		output.write("This is the output of CBB520 HW2 Part2.\n");
 		
 		int numOfContig = geneList.size();
 		for(int i=0; i<numOfContig; i++){
 			
 			//Score one contig aginst all genes;
-			scoreContig(geneList.get(i), contigList, output);
+			int score = scoreGene2Contig(geneList.get(i), contigList);
 			
+			output.write("Score\t" + score +"\t" +"Gene\t" + geneList.get(i).getName() +"\n");
 		}
 		
 		output.close();
@@ -52,7 +71,7 @@ public class CBB520HW2_Part2 {
 	
 	
 
-	private static void scoreContig(gene gene, ArrayList<contig> contigList, BufferedWriter output) throws IOException {
+	private static int scoreGene2Contig(gene gene, ArrayList<contig> contigList) {
 		// TODO Auto-generated method stub
 		
 		int numOfContigs = contigList.size();
@@ -69,12 +88,23 @@ public class CBB520HW2_Part2 {
 		
 		System.out.println("Score: " + score + ", Gene: " + gene.getName());
 		
-		output.write("Score" + "\t" + score +"\t" +"Gene \t" + gene.getName() +"\n");
+		
+		return score;
 		
 	}//end scoreContig;
 	
 	
-	
+	/**********************************************************************
+	 * compare two sequence of different length, break the longer/later sequence into fractions
+	 * each fraction would have equal length of sequence one;
+	 * then call Over50Identical() method to check if the equal length subsequence has 50% 
+	 * identical or not;
+	 * if any of these sub-sequence has over 50% identical with sequence one, return true;
+	 * else return false;
+	 * @param geneSeq
+	 * @param contigSeq
+	 * @return
+	 */
 	private static boolean compareTwoSeq(String geneSeq, String contigSeq) {
 		// TODO Auto-generated method stub
 		
@@ -94,6 +124,7 @@ public class CBB520HW2_Part2 {
 			
 			String subSeqOfContig = contigSeq.substring(i, i+geneLen);
 			
+			//not only the original sequence, but also the reverse sequence
 			if( Over50Identical(subSeqOfContig, geneSeq) ) return true;
 			if( Over50Identical(subSeqOfContig, revgeneSeq)) return true;
 			
@@ -104,6 +135,14 @@ public class CBB520HW2_Part2 {
 	
 	
 	
+	/***************************************************************
+	 * compare two sequences of equal length;
+	 * if there are more than 50% identical, return true;
+	 * else return false;
+	 * @param str1
+	 * @param str2
+	 * @return
+	 */
 	private static boolean Over50Identical(String str1, String str2) {
 		// TODO Auto-generated method stub
 		//str2 is the geneStr;
@@ -123,13 +162,22 @@ public class CBB520HW2_Part2 {
 	}//end Over50Identical() method;
 	
 
+	
+	/*******************************************************
+	 * ReadIn contig.fa documents outputed by Velvet or ABySS;
+	 * Build contig objects based on the contigs data readed from *_contigs.fa file;
+	 * put all these contig objects into an ArrayList;
+	 * 
+	 * @return an ArrayList of contig objects
+	 * @throws FileNotFoundException
+	 */
 	private static ArrayList<contig> createContigArrayList() throws FileNotFoundException {
 		// TODO Auto-generated method stub
 		//1st, read_in genes from D:/BioinformaticsCoursera/TXT/cbb520
 		System.out.println("Step 2, read_in contigs from velvet or abyss outputs.");
 		
 		
-		Scanner genesReader = new Scanner(new File("D:/BioinformaticsCoursera/TXT/cbb520/abyss_k69_contigs.fa"));
+		Scanner genesReader = new Scanner(new File("D:/BioinformaticsCoursera/TXT/cbb520/abyss_k43_contigs.fa"));
 		//Scanner genesReader = new Scanner(new File("D:/BioinformaticsCoursera/TXT/cbb520/S288C_reference.fsa"));
 		//Scanner genesReader = new Scanner(new File("D:/BioinformaticsCoursera/TXT/cbb520/velvet_output_contigs.fa"));
 
@@ -181,7 +229,8 @@ public class CBB520HW2_Part2 {
 	}
 
 	
-	/***********
+	
+	/******************************************************************************************************
 	 * read_in data from D:/BioinformaticsCoursera/TXT/cbb520/seqdump.txt
 	 * create gene objects, put each object into the gene-arrayList;
 	 * @return
@@ -192,7 +241,7 @@ public class CBB520HW2_Part2 {
 		
 		//1st, read_in genes from D:/BioinformaticsCoursera/TXT/cbb520
 		System.out.println("Step 1, read_in genes from seqdump.txt.");
-		Scanner genesReader = new Scanner(new File("D:/BioinformaticsCoursera/TXT/cbb520/seqdump.txt"));
+		Scanner genesReader = new Scanner(new File("D:/BioinformaticsCoursera/TXT/cbb520/seqdump_old.txt"));
 		
 		//Scanner genesReader = new Scanner(new File("D:/BioinformaticsCoursera/TXT/cbb520/seqdump_old.txt"));
 		
@@ -248,6 +297,13 @@ public class CBB520HW2_Part2 {
 
 }//end of everything in CBB520HW2_Part2 class
 
+
+
+/****************************
+ * gene class: Create Gene object
+ * @author Jeff
+ *
+ */
 class gene {
 	
 	private String name;
@@ -290,6 +346,12 @@ class gene {
 	
 }//end of gene class;
 
+
+/**************************
+ * Contig class: create contig objects
+ * @author Jeff
+ *
+ */
 class contig{
 	
 	private String name;
