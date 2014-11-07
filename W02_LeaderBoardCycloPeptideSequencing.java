@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Scanner;
 
@@ -34,6 +33,7 @@ import java.util.Scanner;
  *                       LeaderPeptide ¡û Peptide
  *               else if Mass(Peptide) > ParentMass(Spectrum)
  *                   remove Peptide from Leaderboard
+ *                   
  *           Leaderboard ¡û Trim(Leaderboard, Spectrum, N)
  *           
  *      output LeaderPeptide
@@ -60,24 +60,31 @@ public class W02_LeaderBoardCycloPeptideSequencing {
 
 		
 		
-		//create Leaderboard
+		//1.1st, create Leaderboard
 		ArrayList<ArrayList<Integer>> Leaderboard = new ArrayList<ArrayList<Integer>>();
 		
-		//create an empty peptide arrayList (add 0 only to the arraylist
+		//1.2nd, create an empty peptide arrayList (add 0 only to the arraylist
 		ArrayList<Integer> emptyPeptide = new ArrayList<Integer>();
 		//emptyPeptide.add(0);
 		
-		//add emptyPeptide to leaderboard 
+		//1.3rd, add emptyPeptide to leaderboard 
 		Leaderboard.add(emptyPeptide);
 		
 		
-		//create LeaderPeptide another empty arrayList with only 0 in it
+		
+		//2nd, create LeaderPeptide another empty arrayList with only 0 in it
 		ArrayList<Integer> LeaderPeptide = new ArrayList<Integer>();
 		//LeaderPeptide.add(0);
+		ArrayList<ArrayList<Integer>> leaderPeptideList = new ArrayList<ArrayList<Integer>>();
+		leaderPeptideList.add(LeaderPeptide);
 		
 		
-		//readIn data from D:\BioinformaticsCoursera\TXT\leaderboard_clean.txt
-		Scanner readIn = new Scanner(new File("D:/BioinformaticsCoursera/TXT/leaderboard_clean.txt"));
+		
+		//3rd, readIn data from D:\BioinformaticsCoursera\TXT\leaderboard_clean.txt
+		Scanner readIn = new Scanner(new File("D:/BioinformaticsCoursera/TXT/dataset_102_7.txt"));
+
+		//Scanner readIn = new Scanner(new File("D:/BioinformaticsCoursera/TXT/leaderboard_clean.txt"));
+		
 		int num_N = readIn.nextInt();
 		
 		ArrayList<Integer> expMassList = new ArrayList<Integer>();
@@ -98,7 +105,7 @@ public class W02_LeaderBoardCycloPeptideSequencing {
 		
 		
 		
-		//very important while loop;
+		//4th, very important while loop;
 		while(Leaderboard.size() > 0 ){
 			
 			System.out.println("Size: " + Leaderboard.size() );
@@ -123,8 +130,14 @@ public class W02_LeaderBoardCycloPeptideSequencing {
 					//if score(Leaderboard.get(i), massList) > score(LeaderPeptide, massList)
 					//		LeaderPeptide <-- Leaderboard.get(i);
 					
-					if(scorePeptide2MassList( Leaderboard.get(i), expMassList) > currScore)
+					if(scorePeptide2MassList( Leaderboard.get(i), expMassList) > currScore){
+						
+						System.out.println("currScore: " + currScore);
+						currScore = scorePeptide2MassList( Leaderboard.get(i), expMassList);
 						LeaderPeptide = new ArrayList<Integer>(Leaderboard.get(i));
+					}
+				//	Leaderboard.remove(i);
+				//	i--;
 					
 				} else if (currTotalMass > massParent){
 										
@@ -148,7 +161,7 @@ public class W02_LeaderBoardCycloPeptideSequencing {
 		
 		
 		
-		//output leader peptide arrayList;
+		//5th, output leader peptide arrayList;
 		
 		System.out.println("Printout experimental Peptide arrayList:");
 		printArrayList(expMassList);
@@ -181,11 +194,22 @@ public class W02_LeaderBoardCycloPeptideSequencing {
 		//sort pairList, according to the score of each pair
 		Collections.sort(pairList);
 		
-		for(int i=pairList.size()-num_N; i<pairList.size(); i++){
+		for(int i=0; i<num_N; i++){
 			
 			int index = pairList.get(i).getIndex();
 			
 			retBoard.add(leaderboard.get(index));
+		}
+		
+		
+		//put all these score equal to pairList.get(num_N-1) to the leaderboard too;
+		for(int i= num_N; i<pairList.size(); i++){
+			
+		//	System.out.print(">" + pairList.get(i-1).getScore());
+			
+			if(pairList.get(i).getScore() >= pairList.get(num_N-1).getScore())
+				
+				retBoard.add( leaderboard.get(pairList.get(i).getIndex()) );
 		}
 		
 		return retBoard;
@@ -194,15 +218,18 @@ public class W02_LeaderBoardCycloPeptideSequencing {
 
 	private static int scorePeptide2MassList(ArrayList<Integer> leaderPeptide, ArrayList<Integer> expMassList) {
 		// TODO Auto-generated method stub
+		
+		//1st, get the theoretical-mass-spectrum list for that peptide;
 		ArrayList<Integer> theoMassList = getTheoMassListCyclic(leaderPeptide);
 		
+		//2nd, call comparemassSpectrum() to score the theoretical-mass-spectrum to the experimental spectrum;
 		int score = compareMassSpectrum(expMassList, theoMassList);
 		
 		return score;
 	}
 
 
-	private static int compareMassSpectrum(ArrayList<Integer> exp_MassList,	ArrayList<Integer> theo_MassList) {
+	static int compareMassSpectrum(ArrayList<Integer> exp_MassList,	ArrayList<Integer> theo_MassList) {
 		// TODO Auto-generated method stub
 		int exp_size = exp_MassList.size();
 		int theo_size = theo_MassList.size();
@@ -263,7 +290,7 @@ public class W02_LeaderBoardCycloPeptideSequencing {
 	 * @param leaderPeptide
 	 * @return
 	 */
-	private static ArrayList<Integer> getTheoMassListCyclic(ArrayList<Integer> Peptide) {
+	static ArrayList<Integer> getTheoMassListCyclic(ArrayList<Integer> Peptide) {
 		// TODO Auto-generated method stub
 		ArrayList<Integer> massList = new ArrayList<Integer>();
 		
@@ -274,9 +301,10 @@ public class W02_LeaderBoardCycloPeptideSequencing {
 		
 		for(int i=0; i<Len; i++){
 			
-			for(int j=i; j<Len; j++){
+			for(int j=i+1; j<Len; j++){
 				
 				int currMass = 0;
+				
 				for(int k=i; k<j; k++){
 					
 					currMass += Peptide.get(k);
@@ -320,7 +348,7 @@ public class W02_LeaderBoardCycloPeptideSequencing {
 
 
 
-	private static void printArrayList(ArrayList<Integer> list) {
+	static void printArrayList(ArrayList<Integer> list) {
 		// TODO Auto-generated method stub
 		int Len = list.size();
 		if(Len < 1) {
@@ -383,67 +411,4 @@ public class W02_LeaderBoardCycloPeptideSequencing {
 }//end of everything in W02_leaderBoardCycloPeptideSequencing class;
 
 
-class IndexScorePair implements Comparable<IndexScorePair>{
-	
-	private int index;
-	private int score;
-	
-	public IndexScorePair(int index, int score){
-		super();
-		
-		this.index = index;
-		this.score = score;
-	}
-	
-	public int getIndex(){
-		return index;
-	}
-	public void setIndex(int index){
-		this.index = index;
-	}
-	
-	
-	public int getScore(){
-		return score;
-	}
-	public void setScore(int score){
-		this.score = score;
-	}
-	
-	
-	public int compare(IndexScorePair pair1, IndexScorePair pair2){
-		
-		return( pair1.getScore() > pair2.getScore() ) ? -1: (pair1.getScore() >pair2.getScore()) ? 1:0 ;
-	}
 
-	@Override
-	public int compareTo(IndexScorePair arg0) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-	
-	
-	/******
-	public int compareTo(IndexScorePair comparePair){
-		
-		int compareScore = ((IndexScorePair) comparePair).getScore();
-		
-		return -(this.score - compareScore);
-	}
-	
-	
-	public static Comparator<IndexScorePair> ScoreComparator = new Comparator<IndexScorePair>(){
-		
-		public int compare(IndexScorePair pair1, IndexScorePair pair2){
-			
-			int score1 = pair1.getScore();
-			int score2 = pair2.getScore();
-			
-			return score1 - score2;
-			
-		}
-		
-	};
-	*/
-	
-}//end of IndexScorePair class
