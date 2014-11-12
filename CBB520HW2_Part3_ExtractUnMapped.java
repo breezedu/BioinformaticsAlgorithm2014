@@ -57,11 +57,16 @@ public class CBB520HW2_Part3_ExtractUnMapped {
 		 */
 		int count = 0;
 		int unmapped = 0;
+		
+		//readin the data file line by line;
+		//each line contains the name of that sequence read, the sequence and the quality of the sequence
+		//the 3rd element (3rd column) of each line means whether/where that sequence could be mapped
+		//if that element on the 3rd column is "*", then that sequence could not be mapped back to the reference;
 		while(readIn.hasNextLine()){
 			
 			String currLine = readIn.nextLine();
 			
-			
+			//1st, check the length of each line, if it is shorter than 100, just ignore;
 			if(currLine.length() > 100){
 				
 				count++;
