@@ -75,10 +75,12 @@ public class CBB520HW2_Part3_ExtractUnMapped {
 					output.write("@" + str[0] +"\n");
 					output.write(str[9] + "\t" + str[10] + "\n\n");
 					
-				}
-			}
+				}//end inner if str[2].equals("*");
 			
-		}
+			}//end outer if currLine.length() > 100;
+			
+		}//end while loop;
+		
 		
 		System.out.println("Of all the " +count + " reads, " + unmapped + " could not be mapped into the reference.");
 		double ratio = (double) unmapped/count;
