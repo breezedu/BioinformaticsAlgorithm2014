@@ -15,12 +15,20 @@ public class CBB520HW2_Part3_ExtractUnMapped {
 		
 		//1st, create a scanner to readin data
 		//data document locates: D:\BioinformaticsCoursera\TXT\cbb520
-		Scanner readIn = new Scanner(new File("D:/BioinformaticsCoursera/TXT/cbb520/ver6h.sam"));
+		String routine = "D:/BioinformaticsCoursera/TXT/cbb520/";
+		String sam_file = "verth";
+		// String sam_file = "velvet";
+		// String sam_file = "abyss";
 		
+		Scanner readIn = new Scanner(new File(routine + sam_file +"_short.sam"));
+
+
+		//		Scanner readIn = new Scanner(new File("D:/BioinformaticsCoursera/TXT/cbb520/abyss_short.sam"));
+		//		Scanner readIn = new Scanner(new File("D:/BioinformaticsCoursera/TXT/cbb520/velvet_short.sam"));
 		
 		//2nd, create a writter to write unmapped sequence into a fastq file
-		String routine = "D:/BioinformaticsCoursera/TXT/cbb520/";
-		String doc_name = "ver6h_unmapped.fastq";
+
+		String doc_name = sam_file + "_unmapped.fastq";
 		
 		File output_file = new File(routine + doc_name);
 		BufferedWriter output = new BufferedWriter(new FileWriter(output_file));	
