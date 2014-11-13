@@ -61,7 +61,7 @@ public class CBB520HW2_Part3_Q11 {
 				
 				if(comBed.name.equals(currBed.name)){
 					
-					if( Math.abs(comBed.pos_start - currBed.pos_start) > 600)
+					if( Math.abs(comBed.pos_start - currBed.pos_start) > 600 || !comBed.chr.equals(currBed.chr))
 						count++;
 					
 				}//end if names equals;
