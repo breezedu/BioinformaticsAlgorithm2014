@@ -46,10 +46,12 @@ class bedLine:
         return self.frame
     def setFrame(self, frame):
         self.frame = frame
-###########################################################
+#####################################################################
         
 
-#############################################
+#####################################################################
+## read-in BED data line by line from ver6h.BED/abyss.BED/velvet.BED
+## create BED objects according and put them into an ArrayList
         
 def createBedList():
     print("Step 1: make an arraylist of BED objects from bed file: ")
