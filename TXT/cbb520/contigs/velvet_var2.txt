@@ -1,0 +1,23 @@
+NODE_39_length_90307_cov_25.529074      60746   .       G       T       8.65    .       DP=1;AF1=1;AC1=2;DP4=0,0,1,0;MQ=60;FQ=-30       PL38,3,0
+NODE_47_length_33470_cov_24.615625      28460   .       G       T       9.53    .       DP=1;AF1=1;AC1=2;DP4=0,0,0,1;MQ=60;FQ=-30       PL39,3,0
+NODE_83_length_1386_cov_624.787170      547     .       A       G       3.55    .       DP=1;AF1=1;AC1=2;DP4=0,0,0,1;MQ=60;FQ=-30       PL31,3,0
+NODE_116_length_46286_cov_25.714190     180     .       C       A       6.98    .       DP=1;AF1=1;AC1=2;DP4=0,0,1,0;MQ=60;FQ=-30       PL36,3,0
+NODE_172_length_26514_cov_26.095158     5593    .       G       T       3.01    .       DP=2;AF1=0.4999;AC1=1;DP4=0,1,1,0;MQ=60;FQ=3.48;PV4=1,1,1,1        PL      30,0,32
+NODE_254_length_21828_cov_25.627909     9525    .       CTATATATATATATATATAT    CTATATATATATATATAT      7.35    .       INDEL;DP=1;AF1=1;AC1=2;DP4=0,0,0,1;MQ=60;FQ=-37.5  PL      44,3,0
+NODE_273_length_27449_cov_25.202267     2389    .       A       G       6.2     .       DP=1;AF1=1;AC1=2;DP4=0,0,0,1;MQ=60;FQ=-30       PL35,3,0
+NODE_287_length_21162_cov_25.242037     2961    .       A       G       5.46    .       DP=1;AF1=1;AC1=2;DP4=0,0,0,1;MQ=60;FQ=-30       PL34,3,0
+NODE_297_length_26481_cov_25.119331     19032   .       T       C       11.3    .       DP=1;AF1=1;AC1=2;DP4=0,0,1,0;MQ=60;FQ=-30       PL41,3,0
+NODE_298_length_34885_cov_26.509417     12042   .       C       A       10.4    .       DP=1;AF1=1;AC1=2;DP4=0,0,1,0;MQ=60;FQ=-30       PL40,3,0
+NODE_306_length_73988_cov_25.197964     5240    .       G       T       11.3    .       DP=1;AF1=1;AC1=2;DP4=0,0,0,1;MQ=60;FQ=-30       PL41,3,0
+NODE_313_length_35026_cov_25.216326     6624    .       A       G       5.46    .       DP=1;AF1=1;AC1=2;DP4=0,0,0,1;MQ=60;FQ=-30       PL34,3,0
+NODE_313_length_35026_cov_25.216326     6626    .       G       T       3.55    .       DP=1;AF1=1;AC1=2;DP4=0,0,0,1;MQ=60;FQ=-30       PL31,3,0
+NODE_335_length_2407_cov_522.022461     620     .       G       T       10.4    .       DP=1;AF1=1;AC1=2;DP4=0,0,1,0;MQ=60;FQ=-30       PL40,3,0
+NODE_354_length_37843_cov_25.337580     10459   .       T       C       6.2     .       DP=1;AF1=1;AC1=2;DP4=0,0,1,0;MQ=60;FQ=-30       PL35,3,0
+NODE_421_length_35225_cov_25.868502     9164    .       C       T       6.2     .       DP=1;AF1=1;AC1=2;DP4=0,0,0,1;MQ=60;FQ=-30       PL35,3,0
+NODE_460_length_27930_cov_25.105299     3854    .       GTATATATATATATATAT      GTATATATATATATAT        8.19    .       INDEL;DP=1;AF1=1;AC1=2;DP4=0,0,0,1;MQ=60;FQ=-37.5  PL      45,3,0
+NODE_485_length_23007_cov_25.517929     11021   .       C       A       11.3    .       DP=1;AF1=1;AC1=2;DP4=0,0,0,1;MQ=60;FQ=-30       PL41,3,0
+NODE_565_length_17693_cov_23.968857     9118    .       T       C       3.55    .       DP=1;AF1=1;AC1=2;DP4=0,0,1,0;MQ=60;FQ=-30       PL31,3,0
+NODE_653_length_1261_cov_706.234741     780     .       T       A       14.2    .       DP=3;VDB=0.0099;AF1=0.5006;AC1=1;DP4=1,0,0,2;MQ=60;FQ=-3.57;PV4=0.33,0.4,1,1       PL      44,0,26
+NODE_1147_length_444_cov_624.925659     412     .       C       A       4.77    .       DP=1;AF1=1;AC1=2;DP4=0,0,0,1;MQ=60;FQ=-30       PL33,3,0
+NODE_1261_length_644_cov_125.040375     355     .       T       A       11.3    .       DP=1;AF1=1;AC1=2;DP4=0,0,0,1;MQ=60;FQ=-30       PL41,3,0
+NODE_1290_length_459_cov_55.873638      159     .       C       T       6.98    .       DP=1;AF1=1;AC1=2;DP4=0,0,1,0;MQ=60;FQ=-30       PL36,3,0
