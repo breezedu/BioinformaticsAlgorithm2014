@@ -135,7 +135,7 @@ def createContigList():
                 
     print("Contigs (>100 bp): " + str(len(contigList)))
 
-    for p in range(0, len(contigList), 1):
+    #for p in range(0, len(contigList), 1):
        # print("contig name: " + str(contigList[p].getName()) + "   size: " + str(contigList[p].getLength()))
 
     return contigList
@@ -152,7 +152,7 @@ def checkSNPs(vcfList, contigList):
         vcfRef = currVcf.getRef()
         vcfAlt = currVcf.getAlt()
         
-        print("VCF Name: " + str(vName))
+        print("VCF Name: " + str(vcfName))
         
         for m in range(0, len(contigList), 1):
             currContig = contigList[m]
@@ -189,7 +189,7 @@ def main():
     #check the SNPs in reference/contig arrayList;
     checkSNPs(vcfList, contigList)
     
-    print("total SNP's: " + str(len(vcf)))
+    print("total SNP's: " + str(len(vcfList)))
 
 if __name__ == "__main__":
     main()
