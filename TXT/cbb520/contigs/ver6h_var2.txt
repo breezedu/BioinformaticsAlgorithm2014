@@ -1,0 +1,18 @@
+yjm993_Chr01    4851    .       G       A       11.3    .       DP=1;AF1=1;AC1=2;DP4=0,0,1,0;MQ=60;FQ=-30       PL      41,3,0
+yjm993_Chr01    4879    .       C       A       6.2     .       DP=1;AF1=1;AC1=2;DP4=0,0,1,0;MQ=60;FQ=-30       PL      35,3,0
+yjm993_Chr02    82140   .       A       G       11.3    .       DP=1;AF1=1;AC1=2;DP4=0,0,0,1;MQ=60;FQ=-30       PL      41,3,0
+yjm993_Chr02    171379  .       C       A       11.3    .       DP=1;AF1=1;AC1=2;DP4=0,0,0,1;MQ=60;FQ=-30       PL      41,3,0
+yjm993_Chr05    552102  .       A       G       7.8     .       DP=1;AF1=1;AC1=2;DP4=0,0,1,0;MQ=60;FQ=-30       PL      37,3,0
+yjm993_Chr05    552430  .       G       A       6.2     .       DP=1;AF1=1;AC1=2;DP4=0,0,0,1;MQ=60;FQ=-30       PL      35,3,0
+yjm993_Chr10    647323  .       T       C       6.2     .       DP=1;AF1=1;AC1=2;DP4=0,0,1,0;MQ=60;FQ=-30       PL      35,3,0
+yjm993_Chr11    598626  .       G       T       10.4    .       DP=1;AF1=1;AC1=2;DP4=0,0,0,1;MQ=60;FQ=-30       PL      40,3,0
+yjm993_Chr12    63648   .       GATATATATATATATATATA    GATATATATATATATATA      7.35    .       INDEL;DP=1;AF1=1;AC1=2;DP4=0,0,1,0;MQ=60;FQ=-37.5  PL      44,3,0
+yjm993_Chr12    354651  .       G       T       6.98    .       DP=1;AF1=1;AC1=2;DP4=0,0,0,1;MQ=60;FQ=-30       PL      36,3,0
+yjm993_Chr13    147191  .       C       A       3.01    .       DP=2;AF1=0.4999;AC1=1;DP4=1,0,0,1;MQ=60;FQ=3.48;PV4=1,1,1,1     PL      30,0,32
+yjm993_Chr13    310325  .       G       T       8.65    .       DP=1;AF1=1;AC1=2;DP4=0,0,1,0;MQ=60;FQ=-30       PL      38,3,0
+yjm993_Chr13    386419  .       G       T       9.53    .       DP=1;AF1=1;AC1=2;DP4=0,0,0,1;MQ=60;FQ=-30       PL      39,3,0
+yjm993_Chr14    405406  .       GTATATATATATATATAT      GTATATATATATATAT        8.19    .       INDEL;DP=1;AF1=1;AC1=2;DP4=0,0,0,1;MQ=60;FQ=-37.5  PL      45,3,0
+yjm993_mito     21893   .       A       G       3.55    .       DP=1;AF1=1;AC1=2;DP4=0,0,0,1;MQ=60;FQ=-30       PL      31,3,0
+yjm993_2micron  802     .       C       A       10.4    .       DP=1;AF1=1;AC1=2;DP4=0,0,0,1;MQ=60;FQ=-30       PL      40,3,0
+
+
