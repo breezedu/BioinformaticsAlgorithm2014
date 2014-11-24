@@ -23,9 +23,9 @@ public class CBB520HW2_Part5 {
 		System.out.println("Step 1: Create scanner for contigs data.");
 		String routine = "D:/BioinformaticsCoursera/TXT/cbb520/contigs/";
 		
-		String doc = "abyss";
+		String doc = "ver6h";
 		
-		String doc_pilon = doc + "1M_pillon.changes";
+		String doc_pilon = doc + "1M_pilon.changes";
 		String doc_vcf = doc + "_variants.txt";
 		
 		
