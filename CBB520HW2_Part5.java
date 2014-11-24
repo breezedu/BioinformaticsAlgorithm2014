@@ -4,11 +4,10 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Scanner;
 
 /*********************************
- * 
+ * CBB520 HomeWork2 Part5
  * @author Jeff
  *
  */
@@ -76,12 +75,13 @@ public class CBB520HW2_Part5 {
 		
 		int count = 0;
 		
+		/**
 		//create a HashMap to store all ChromSNPs
-		HashMap<String, String> snpMap = new HashMap<String, String>();
+		HashSet<ChromSNPs> snpSet = new HashSet<ChromSNPs>();
 		
 		for(int i=0; i<sizeV; i++){
 			
-			snpMap.put(vcfList.get(i).getChrom(), vcfList.get(i).getPost());
+			snpSet.add(vcfList.get(i));
 		
 		}//end for i<sizeV loop;
 		
@@ -89,18 +89,31 @@ public class CBB520HW2_Part5 {
 		//check each ChromSNPs in pilonList, to see if there's any duplicate to vcfList;
 		for(int i=0; i<sizeP; i++){
 			
-			String chrom = pilonList.get(i).getChrom();
-			String post = pilonList.get(i).getPost();
-			
 			//if both chrom and post are equal, then remove this ChromSNPs; cout++;
-			if(snpMap.containsKey( chrom )){
-				
-				if(snpMap.get(chrom).equals(post))
+			if(snpSet.contains(pilonList.get(i))){
+
 					count++;
-			}
+					
+			} //end if condition
 
 		}//end for i<sizeP loop;
 		
+		*/
+		
+		for(int i=0; i<sizeV; i++){
+			
+			ChromSNPs vSNP = vcfList.get(i);
+			
+			for(int j=0; j<sizeP; j++){
+				
+				ChromSNPs pSNP = pilonList.get(j);
+				
+				if(vSNP.getChrom().equals(pSNP.getChrom()) && vSNP.getPost().equals(pSNP.getPost()))
+					count++;
+		
+			} //end inner for i<sizeP loop;
+			
+		}//end outer for i<sizeV loop;
 		
 		return sizeV + sizeP - count;
 		
@@ -127,7 +140,7 @@ public class CBB520HW2_Part5 {
 			split = split[1].split("\\s");
 			String post = split[0];
 			
-			System.out.println("chrom: |" + chrom +"|, post:|" + post +"|.");
+			System.out.println("Pilon chrom: |" + chrom +"|, post:|" + post +"|.");
 			
 			ChromSNPs currSNP = new ChromSNPs(chrom, post);
 			pilonList.add(currSNP);
@@ -178,6 +191,8 @@ public class CBB520HW2_Part5 {
 			
 			ChromSNPs currSNP = new ChromSNPs(split[0], split[1]);
 			vcfList.add(currSNP);
+			
+			System.out.println("Samtools chrom:|" + currSNP.getChrom() +"|, post:|" + currSNP.getPost() +"|. " );
 			
 		}//end for i<size loop;
 		
