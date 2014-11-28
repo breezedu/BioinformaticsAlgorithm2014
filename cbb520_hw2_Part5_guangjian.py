@@ -1,33 +1,10 @@
-###########################################
+############################################################################
 # CBB520 HomeWork2 Part5
-###########################################
+############################################################################
 # include "Python.h"
 #
 ############################################################################
-# Class definition for pilon-error (actually it is also SNP information)
-# each object has name, sequence, and length parameters
-############################################################################
 
-class pilon:
-    def __init__(self, name, sequence, length):
-        self.name = name
-        self.seuence = sequence
-        self.length = length
-        
-    def getName(self):
-        return self.name
-    def setName(self, name):
-        self.name = name
-        
-    def getSequence(self):
-        return self.sequence
-    def setSequence(self, sequence):
-        self.sequence = sequence
-        
-    def getLength(self):
-        return self.length
-    def setLength(self, length):
-        self.length = length
 
 
 ############################################################################
@@ -53,6 +30,9 @@ class snp:
         self.position = position
     
 
+###############################################################################
+# create vcf SNPs arrayList
+###############################################################################
 
 def createVcfChangeList():
 
@@ -127,6 +107,7 @@ def mergeLists(vcfList, pilonList):
     vSize = len(vcfList)
     pSize = len(pilonList)              
 
+    # create another arrayList, to merge vcf_list and pilon_list
     merge = []
     count = 0
     for n in range(0, vSize, 1):
@@ -139,80 +120,32 @@ def mergeLists(vcfList, pilonList):
 
     print("vcfList[0]: " + str(vcfList[0].getChrom()) + " pos:" +str(vcfList[0].getPos()))
     count = 0
+
+    # add every object from vcfList to merge_list
     for n in range(0, vSize, 1):
         curr = vcfList[n]
         
         merge.append(curr)
         #    count = count + 1
-        #    print("count: " + str(count) + " n:" + str(n) +" snp-chrom:" + curr.getChrom())           #wired, when n=1069, something wrong...
+        #    print("count: " + str(count) + " n:" + str(n) +" snp-chrom:" + curr.getChrom())
+        #    wired, when n=1069, something wrong...
     #print("the size of merge-arrayList: " + str(len(merge))
     print("count: " + str(count))
+
+    # for every object in pilonList, if it is not in merge_List, add it to merge_List
     for m in range(0, pSize, 1):
         curr2 = pilonList[m]
         if curr2 not in merge:
             merge.append(curr2)
             count = count + 1;
+
+    # printout size of merge_list
     mS = len(merge)
     print(str(mS) + " count: " + str(count))
 
     return merge
 
-        
-###############################################################################
-#method finds the SNPs in the pilon sequences compared to the contig sequences
-#and outputs where on each contig the SNP is found
-###############################################################################
-
-def findSNP(str1, str2, name):
-    #print("step 4: compare strings ")
-    pLen = len(str1)
-    cLen = len(str2)
-    result = []
-    
-    #if (pLen == cLen):
-    #   print("-----------------check------------------")
-    if(pLen < cLen):
-        total = pLen - 1
-    else:
-        total = cLen - 1
-    for m in range(0, total, 1):
-        #print (str1[m] + " : " + str2[m])
-        if(str1[m] != str2[m]):
-            currR = name + "___"+ str(m+1) + " : " + str1[m] + " " + str2[m]
-            result.append(currR)
-            print("---------------------any?---------------" + currR )
-
-    return result
-
-
-
-
-##########################################################################
-#method compares a list of pilon sequences and a list of contig sequences
-#and outputs where on each contig the SNP is found
-##########################################################################
-
-def compareList(pilonList, contigList):
-    print("Step 3: compare list ")
-    pNum = len(pilonList)
-    cNum = len(contigList)
-    result = []
-    total = 0
-
-    for i in range(0, pNum, 1):
-        pName = pilonList[i].getName()
-        pSeq = pilonList[i].getSequence()
-        for j in range(0, cNum, 1):
-            cName = contigList[j].getName()
-            cSeq = contigList[j].getSequence()
-            name = pilonList[i].getName() + " : " + contigList[j].getName()            
-            if(pName == cName):
-                result = findSNP(pSeq, cSeq, name)
-                total = total + len(result)
-
-    print("SNPs: " + total)
-    return result    
-
+ 
     
 #############################################################################
 # main method
@@ -226,20 +159,20 @@ def main():
     #create an arrayList of SNPs from *.vcf file
     #these SNP information were generated by BWA and Samtools
     vcfList = createVcfChangeList()
-    s1 = str(len(vcfList))
+    snp_Samtools = str(len(vcfList))
 
 
     #create an arrayList of Errors from *.change file
     #these SNP(error) information were generated by Pilon
     pilonList = createPilonChangeList()
-    s2 = str(len(pilonList))
+    snp_Pilon = str(len(pilonList))
 
 
     #compare and merge the vcf-arrayList and pilon-arrayList, remove duplicates
     #after merging, the count of total SNPs are the ultimate number of SNPs
     merge = mergeLists(vcfList, pilonList)
-    s3 = str(len(merge))
-    print("vcf: " + s1 + "     " + "pilon: " + s2 + "     " + "total: " + s3)
+    snp_total = str(len(merge))
+    print("vcf: " + snp_Samtools + "     " + "pilon: " + snp_Pilon + "     " + "total: " + snp_total)
     
 
 ####################################
