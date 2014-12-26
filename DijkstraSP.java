@@ -34,11 +34,12 @@ import java.util.Stack;
  *************************************************************************/
 
 
-/**
+/***********************************************************************************
  *  The <tt>DijkstraSP</tt> class represents a data type for solving the
  *  single-source shortest paths problem in edge-weighted digraphs
  *  where the edge weights are nonnegative.
  *  <p>
+ *  
  *  This implementation uses Dijkstra's algorithm with a binary heap.
  *  The constructor takes time proportional to <em>E</em> log <em>V</em>,
  *  where <em>V</em> is the number of vertices and <em>E</em> is the number of edges.
@@ -51,13 +52,15 @@ import java.util.Stack;
  *
  *  @author Robert Sedgewick
  *  @author Kevin Wayne
+ ***********************************************************************************
  */
 public class DijkstraSP {
     private double[] distTo;          // distTo[v] = distance  of shortest s->v path
     private DirectedEdge[] edgeTo;    // edgeTo[v] = last edge on shortest s->v path
     private IndexMinPQ<Double> pq;    // priority queue of vertices
 
-    /**
+    
+    /*********************************************************************************
      * Computes a shortest paths tree from <tt>s</tt> to every other vertex in
      * the edge-weighted digraph <tt>G</tt>.
      * @param G the edge-weighted digraph
@@ -101,6 +104,7 @@ public class DijkstraSP {
         }
     }
 
+    
     /**
      * Returns the length of a shortest path from the source vertex <tt>s</tt> to vertex <tt>v</tt>.
      * @param v the destination vertex
@@ -111,6 +115,7 @@ public class DijkstraSP {
         return distTo[v];
     }
 
+    
     /**
      * Is there a path from the source vertex <tt>s</tt> to vertex <tt>v</tt>?
      * @param v the destination vertex
@@ -121,6 +126,7 @@ public class DijkstraSP {
         return distTo[v] < Double.POSITIVE_INFINITY;
     }
 
+    
     /**
      * Returns a shortest path from the source vertex <tt>s</tt> to vertex <tt>v</tt>.
      * @param v the destination vertex
@@ -211,11 +217,14 @@ public class DijkstraSP {
                     }
                 }
                 StdOut.println();
-            }
-            else {
+            
+            } else {
+            	
                 StdOut.printf("%d to %d         no path\n", s, t);
             }
-        }
-    }
+        
+        }//end for t<G.V() loop;
+        
+    }//end main();
 
-}
+}//end of everything; 
